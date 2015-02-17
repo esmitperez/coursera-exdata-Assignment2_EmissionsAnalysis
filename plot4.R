@@ -3,6 +3,33 @@
 #Exploratory Data Analysis on Coursera - exdata-011
 
 #Across the United States, how have emissions from coal combustion-related sources changed from 1999–2008?
+zipFilename <- "exdata-data-NEI_data.zip"
+
+if ( !file.exists(zipFilename)){
+        message("Downloading file...")
+        download.file(url="https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2FNEI_data.zip", 
+                      destfile = zipFilename, 
+                      method = "curl",)    
+        
+}else{
+        message("Zip file already downloaded.")
+}
+if (!file.exists("summarySCC_PM25.rds")){
+        message("Unzipping data .zip...")
+        unzip(zipfile = zipFilename)
+}else{
+        message("Data file already unzipped.")
+}
+
+if (!exists("projectData")){
+        message("Creating data structures from files...")
+        ## This first line will likely take a few seconds. Be patient!
+        NEI <- readRDS("summarySCC_PM25.rds")
+        SCC <- readRDS("Source_Classification_Code.rds")
+        projectData <- merge(NEI,SCC, by = "SCC")
+}else{
+        message("Project Data already in environment :)")
+}
 
 # Find out all coal related sources
 coalSourceCode <- SCC[grep("Coal",SCC$Short.Name),]$SCC
@@ -12,9 +39,14 @@ coalCombustionData <- projectData[projectData$SCC %in% coalSourceCode,]
 
 plot4Data <- aggregate(Emissions ~ year, coalCombustionData, sum)
 
+png(filename = "plot4.png", width = 480, height = 480)
+
 with (plot4Data, {
-        plot(Emissions/1000 ~ year , type="o", xlab="Year", ylab="Total emissions (in thousands of tons)", 
+        plot(Emissions/1000 ~ year , type="o", xlab="Year", ylab="Emissions (in thousands of tons)", 
              lwd=3, lty="solid", col="coral3", col.lab="navajowhite4", 
-             main = "Total emissions from PM2.5, from 1999 to 2008") 
+             main = "Total emissions from\nCoal Combustion related sources, 1999-2008") 
         abline(lm(Emissions/1000 ~ year), lwd=2, lty="dashed", col="slateblue") 
+        axis(side = 1, at = 1999:2008)
 })
+
+dev.off()

@@ -31,7 +31,10 @@ if (!exists("projectData")){
         message("Project Data already in environment :)")
 }
 
+########### Plotting code ########### 
+
 # Find out all coal related sources
+# ONLY the ones matching "Coal" anywhere in its short name are filtered in.
 coalSourceCode <- SCC[grep("Coal",SCC$Short.Name),]$SCC
 
 # filter the original data, using just this

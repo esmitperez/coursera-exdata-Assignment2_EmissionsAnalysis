@@ -37,6 +37,7 @@ if (!exists("projectData")){
         message("Project Data already in environment :)")
 }
 
+########### Plotting code ########### 
 
 plot3Data <- projectData[projectData$fips=="24510",]
 

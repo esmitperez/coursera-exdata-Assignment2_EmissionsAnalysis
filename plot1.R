@@ -37,6 +37,7 @@ if (!exists("projectData")){
 }
 
 ########### Plotting code ########### 
+
 plot1Data <- aggregate(Emissions ~ year, projectData, sum)
 
 png(filename = "plot1.png", width = 480, height = 480)

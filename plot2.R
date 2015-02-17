@@ -32,6 +32,8 @@ if (!exists("projectData")){
         message("Project Data already in environment :)")
 }
 
+########### Plotting code ########### 
+
 plot2Data <- aggregate(Emissions ~ year, projectData[projectData$fips=="24510",], sum)
 
 png(filename = "plot2.png", width = 480, height = 480)

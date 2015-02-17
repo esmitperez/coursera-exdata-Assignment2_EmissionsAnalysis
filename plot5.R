@@ -32,7 +32,12 @@ if (!exists("projectData")){
         message("Project Data already in environment :)")
 }
 
+########### Plotting code ########### 
+
+
 # Find out all coal related sources
+# ONLY the ones matching "Motor Vehicle" anywhere in its short name are filtered in.
+
 motorVehicleSourceCode <- SCC[grep("Motor Vehicle",SCC$Short.Name),]$SCC
 
 # filter the original data, using just this
@@ -43,7 +48,7 @@ plot5Data <- aggregate(Emissions ~ year, motorVehiclesDataBaltimore, sum)
 png(filename = "plot5.png", width = 480, height = 480)
 
 with (plot5Data, {
-        plot(Emissions ~ year , xlim = c(1999,2010), type="o", xlab="Year", ylab="Emissions (in tons)", 
+        plot(Emissions ~ year , xlim = c(1999,2008), type="o", xlab="Year", ylab="Emissions (in tons)", 
              lwd=3, lty="solid", col="coral3", col.lab="navajowhite4", 
              main = "Total emissions from Motor Vehicle sources,\n in the United States, 1999-2008")
         abline(lm(Emissions ~ year), lwd=2, lty="dashed", col="slateblue") 

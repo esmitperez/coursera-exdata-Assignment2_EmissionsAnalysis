@@ -47,7 +47,7 @@ png(filename = "plot4.png", width = 480, height = 480)
 with (plot4Data, {
         plot(Emissions/1000 ~ year , type="o", xlab="Year", ylab="Emissions (in thousands of tons)", 
              lwd=3, lty="solid", col="coral3", col.lab="navajowhite4", 
-             main = "Total emissions from\nCoal Combustion related sources, 1999-2008") 
+             main = "Total emissions in the U.S. from\nCoal Combustion related sources, 1999-2008") 
         abline(lm(Emissions/1000 ~ year), lwd=2, lty="dashed", col="slateblue") 
         axis(side = 1, at = 1999:2008)
 })

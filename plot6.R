@@ -65,5 +65,6 @@ g <- g + geom_point(aes(x=year, y=Emissions, group=City, color=City))
 g <- g + ggtitle("Total emissions for Baltimore and Los Angeles\n1999-2008") + ylab("Emissions (in tons)") + xlab("Years")
 g <- g + scale_x_continuous(breaks=c(1999,2002,2005,2008))
 g <- arrangeGrob(g, sub = textGrob("Note: Only sources with 'Motor Vehicle' in their name were used", x = 0, hjust = -0.1, vjust=0.1, gp = gpar(fontface = "italic", fontsize = 12)))
+g
 
-ggsave(file="plot6.png", plot=g, width=8, height=4)
+ggsave(file="plot6.png", plot=g, width = 8, height = 4, dpi=100)

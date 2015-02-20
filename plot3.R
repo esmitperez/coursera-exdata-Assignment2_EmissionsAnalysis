@@ -42,6 +42,7 @@ if (!exists("projectData")){
 plot3Data <- projectData[projectData$fips=="24510",]
 
 baltimoreData <- aggregate(Emissions ~ year * type, plot3Data, sum)
+#png(filename = "plot3.png", width = 480, height = 480)
 
 # Customizations based on http://zevross.com/blog/2014/08/04/beautiful-plotting-in-r-a-ggplot2-cheatsheet-3/#working-with-the-legend
 g <- ggplot(data = baltimoreData) 
@@ -55,5 +56,6 @@ g <- g + theme_bw() + theme(legend.key = element_blank())
 g <- g + scale_colour_manual(name='', values=c('Emissions'='coral3', 'Tendency'='slateblue'))
 g <- g + guides(colour = guide_legend(override.aes = list(linetype=c(1,1), shape=c(16,NA))))
 g <- g + scale_x_continuous(breaks=c(1999,2002,2005,2008))
-
-ggsave(file="plot3.png", width=8, height=4)
+g
+ggsave(file="plot3.png", width=8, height=4, dpi=100)
+#dev.off()
